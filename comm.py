@@ -1,5 +1,7 @@
 from pywinusb import hid
 
+# test of serial wifi communication
+
 filter1 = hid.HidDeviceFilter(vendor_id=0x0416, product_id=0xffff)
 devices = filter1.get_devices()
 
