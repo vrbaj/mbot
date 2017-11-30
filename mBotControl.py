@@ -1,8 +1,9 @@
 import msvcrt
 from pywinusb import hid
+# controling mBot thru serial wifi with numerical keys 2,4,5,6,8
 
 
-filter1 = hid.HidDeviceFilter(vendor_id=0x0416, product_id=0xffff)
+filter1 = hid.HidDeviceFilter(vendor_id=0x0416, product_id=0xffff)  # find serial dongle
 devices = filter1.get_devices()
 
 if devices:
@@ -15,10 +16,10 @@ while True:
     if msvcrt.kbhit():
         key = msvcrt.getch()
         key_number = ord(key)
-        print(key_number)  # kod klavesy.
+        print(key_number)  # stroked key number
         if key_number == 113:
             break
-        if key_number == 56:  # vpred
+        if key_number == 56:  # go ahead
             device.open()
             out_report = device.find_output_reports()[0]
             my_buffer = [0x0] * 31
@@ -29,7 +30,7 @@ while True:
             out_report.set_raw_data(my_buffer)
             out_report.send(my_buffer)
             device.close()
-        if key_number == 53:  # stop
+        if key_number == 53:  # stop moving
             device.open()
             out_report = device.find_output_reports()[0]
             my_buffer = [0x0] * 31
@@ -40,7 +41,7 @@ while True:
             out_report.set_raw_data(my_buffer)
             out_report.send(my_buffer)
             device.close()
-        if key_number == 50:  # zpet
+        if key_number == 50:  # backwards
             device.open()
             out_report = device.find_output_reports()[0]
             my_buffer = [0x0] * 31
@@ -51,7 +52,7 @@ while True:
             out_report.set_raw_data(my_buffer)
             out_report.send(my_buffer)
             device.close()
-        if key_number == 52:  # vlevo
+        if key_number == 52:  # turn left
             device.open()
             out_report = device.find_output_reports()[0]
             my_buffer = [0x0] * 31
@@ -62,7 +63,7 @@ while True:
             out_report.set_raw_data(my_buffer)
             out_report.send(my_buffer)
             device.close()
-        if key_number == 54:  # vpravo
+        if key_number == 54:  # turn right
             device.open()
             out_report = device.find_output_reports()[0]
             my_buffer = [0x0] * 31
@@ -73,6 +74,5 @@ while True:
             out_report.set_raw_data(my_buffer)
             out_report.send(my_buffer)
             device.close()
-# 50 zpet, 56 vpred,52 vlevo,54 vpravo, 53 stop
 
 

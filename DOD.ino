@@ -1,8 +1,10 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <SoftwareSerial.h>
-
 #include <MeMCore.h>
+
+// code for mBot controlled via wireless serial line
+
 
 MeDCMotor motor_9(9);
 MeDCMotor motor_10(10);
@@ -55,17 +57,30 @@ while (se.available()) {
       if(msg[0]=='1'){
       rgbled_7.setColor(0, 255, 255, 255);
       rgbled_7.show();  
+      move(1,100);
       }
       if(msg[0]=='2'){
-      rgbled_7.setColor(0,50, 0,0);
-      rgbled_7.show();  
+        rgbled_7.setColor(0,50, 0,0);
+        rgbled_7.show(); 
+        move(2,100) ;
       }  
-      Serial.println("..was the message");
-
-
+      if(msg[0]=='3'){
+        rgbled_7.setColor(0,50, 0,0);
+        rgbled_7.show(); 
+        move(3,100) ;
+      }  
+      if(msg[0]=='4'){
+        rgbled_7.setColor(0,50, 0,0);
+        rgbled_7.show(); 
+        move(4,100) ;
+      }  
+      if(msg[0]=='5'){
+        rgbled_7.setColor(0,50, 0,0);
+        rgbled_7.show(); 
+        move(1,0) ;
+      }
     msg="";
   } 
-
 
 
 
